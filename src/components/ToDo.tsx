@@ -1,8 +1,9 @@
-import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { createCategory, IToDo, toDoState } from "../atoms";
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
+  const categories = useRecoilValue(createCategory);
   const onClick = (newCategory: IToDo["category"]) => {
     setToDos((oldToDos) => {
       const toDoTargetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
@@ -17,7 +18,16 @@ function ToDo({ text, category, id }: IToDo) {
   return (
     <li>
       <span>{text}</span>
-      {category !== "TO_DO" && (
+      {categories.map(function (categories) {
+        return (
+          category !== `${categories.value}` && (
+            <button onClick={() => onClick(`${categories.value}`)}>
+              {categories.text}
+            </button>
+          )
+        );
+      })}
+      {/* {category !== "TO_DO" && (
         <button onClick={() => onClick("TO_DO")}>To Do</button>
       )}
       {category !== "DOING" && (
@@ -25,7 +35,7 @@ function ToDo({ text, category, id }: IToDo) {
       )}
       {category !== "DONE" && (
         <button onClick={() => onClick("DONE")}>Done</button>
-      )}
+      )} */}
     </li>
   );
 }
