@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { categoryState, toDoState } from "../atoms";
+import { ToDoForm, ToDoInput, ToDoButton } from "./CreateCategory";
 
 interface IForm {
   toDo: string;
@@ -26,15 +27,15 @@ function CreateToDo() {
     setValue("toDo", "");
   };
   return (
-    <form onSubmit={handleSubmit(handleValid)}>
-      <input
+    <ToDoForm onSubmit={handleSubmit(handleValid)}>
+      <ToDoInput
         {...register("toDo", {
           required: "Please write a To Do",
         })}
         placeholder="Write a to do"
       />
-      <button>Add</button>
-    </form>
+      <ToDoButton>Add</ToDoButton>
+    </ToDoForm>
   );
 }
 //+삭제 기능 +localStorage를 이용한 저장 기능

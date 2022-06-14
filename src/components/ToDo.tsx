@@ -1,5 +1,19 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { createCategory, IToDo, toDoState } from "../atoms";
+import { ToDoButton } from "./CreateCategory";
+
+const ToDoList = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  list-style: none;
+`;
+const ListButton = styled(ToDoButton)`
+  font-size: 13px;
+  margin-left: 5px;
+`;
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -25,17 +39,19 @@ function ToDo({ text, category, id }: IToDo) {
     });
   };
   return (
-    <li>
+    <ToDoList>
       <span>{text}</span>
-      {categories.map(function (categories) {
-        return (
-          category !== `${categories.value}` && (
-            <button onClick={() => onClick(`${categories.value}`)}>
-              {categories.text}
-            </button>
-          )
-        );
-      })}
+      <div>
+        {categories.map(function (categories) {
+          return (
+            category !== `${categories.value}` && (
+              <ListButton onClick={() => onClick(`${categories.value}`)}>
+                {categories.text}
+              </ListButton>
+            )
+          );
+        })}
+      </div>
       {/* {category !== "TO_DO" && (
         <button onClick={() => onClick("TO_DO")}>To Do</button>
       )}
@@ -45,7 +61,7 @@ function ToDo({ text, category, id }: IToDo) {
       {category !== "DONE" && (
         <button onClick={() => onClick("DONE")}>Done</button>
       )} */}
-    </li>
+    </ToDoList>
   );
 }
 
