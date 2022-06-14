@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/trello-todolist-app/static/js/main.a5c678b8.js",
+    "index.html": "/trello-todolist-app/index.html",
+    "main.a5c678b8.js.map": "/trello-todolist-app/static/js/main.a5c678b8.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a5c678b8.js"
+  ]
+}
