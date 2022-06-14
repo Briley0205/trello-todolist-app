@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { createCategory } from "../atoms";
@@ -15,7 +16,12 @@ function CreateCategory() {
       { text: category, value: category },
     ]);
     setValue("category", "");
+    localStorage.setItem("categories", JSON.stringify(categories));
   };
+  const categories = useRecoilValue(createCategory);
+  useEffect(() => {
+    localStorage.setItem("categories", JSON.stringify(categories));
+  }, [categories]);
   return (
     <form onSubmit={handleSubmit(handleCategory)}>
       <input

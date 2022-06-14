@@ -9,12 +9,20 @@ interface IForm {
 function CreateToDo() {
   const setToDos = useSetRecoilState(toDoState);
   const category = useRecoilValue(categoryState);
+
+  /**const {for input, for form, for the input value} = useForm<Interface>() */
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const handleValid = ({ toDo }: IForm) => {
-    setToDos((oldToDos) => [
-      { text: toDo, id: Date.now(), category },
-      ...oldToDos,
-    ]);
+    setToDos((oldToDos) => {
+      /**saving toDos on the localstorage */
+      localStorage.setItem(
+        "prevToDos",
+        JSON.stringify([{ text: toDo, id: Date.now(), category }, ...oldToDos])
+      );
+      return [{ text: toDo, id: Date.now(), category }, ...oldToDos];
+    });
+    /**It takes the input value and remove it */
+    /**setValue("form item(name of input register)", "value") */
     setValue("toDo", "");
   };
   return (

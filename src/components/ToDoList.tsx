@@ -34,11 +34,7 @@ function ToDoList() {
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
   };
-  console.log(toDos);
   const categories = useRecoilValue(createCategory);
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
   return (
     <Container>
       <Header>
